@@ -291,7 +291,7 @@ return $poleLudiANavstevnosti;
 }
 
 
-
+//pocet minut ktore bola osoba na prednaske
 function minutyNaPrednske($conn,$poleLudi){
 
 
@@ -300,13 +300,12 @@ function minutyNaPrednske($conn,$poleLudi){
     $minutyNaPrednaske = array();
 
     foreach ($poleLudi as $clovek){
+        $osobaNaPrednaske=array();
+        for ($i =0; $i<$pocet-1; $i++){
 
-       // for ($i =0; $i<$pocet-1; $i++){
-
-            $db = "Predanaska0";
+            $db = "Predanaska".$i;
             $meno='"'.$clovek['meno'].'"';
-            $sql = 'select meno from '.$db.' where meno='.$meno.' ;';
-            echo $sql;
+            $sql = 'select * from '.$db.' where meno='.$meno.' ;';
             $stm = $conn->prepare($sql);
             $stm->execute();
             $statistiky = $stm->fetchALl(PDO::FETCH_ASSOC);
@@ -315,26 +314,26 @@ function minutyNaPrednske($conn,$poleLudi){
             foreach ($statistiky as $item) {
 
                 if ($item['akcia']=="Joined"){
-                    $datumAcas = explode(',', $item['datum']);
+                    $datumAcas = explode(' ', $item['datum']);
                     $cas = $cas + minutes($datumAcas[1]);
                 }
                 else{
-                    $datumAcas = explode(',', $item['datum']);
+                    $datumAcas = explode(' ', $item['datum']);
                     $cas = $cas - minutes($datumAcas[1]);
                 }
 
             }
+            $minuty = round(abs($cas),2);
+            array_push($osobaNaPrednaske,$minuty);
 
-            array_push($minutyNaPrednaske,$cas);
 
 
+        }
 
-        //}
-
-      //  array_push($poleLudiANavstevnosti,$navstevy);
+        array_push($minutyNaPrednaske,$osobaNaPrednaske);
     }
 
-   // return $poleLudiANavstevnosti;
+    return $minutyNaPrednaske;
 
 }
 
@@ -344,5 +343,15 @@ function minutes($time){
     return ($time[0]*60) + ($time[1]) + ($time[2]/60);
 }
 
+
+/// cas na prednaskach spolu
+function casSpolu($pole){
+    $dokopy=0;
+    foreach ($pole as $item){
+        $dokopy=$dokopy+$item;
+    }
+
+    return $dokopy;
+}
 
 ?>

@@ -22,8 +22,23 @@ function graf(data) {
             yValueFormatString: "##0\"\"",
             indexLabel: "{label}",
             dataPoints: dps
-        }]
+        }],
+
     });
     chart.render();
 
 }
+
+$(document).ready(function() {
+    $('#table').DataTable( {
+        columnDefs: [ {
+            targets: [ 4 ],
+            orderData: [4, 2 ]
+        }],
+        "searching": false,
+        "paging": false,
+        "lengthChange": false,
+        "info": false,
+        "order": [[1,'asc']],
+    } );
+} );

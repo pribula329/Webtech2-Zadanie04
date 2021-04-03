@@ -1,0 +1,22 @@
+.tabulka{
+    max-height:  450px;
+    overflow-y: auto;
+    background-color: white;
+
+}
+
+
+th{
+    position: sticky;
+    top: 0;
+}
+body{
+    background: linear-gradient(to top left, #44A4C4, #f0ff00);
+    color: Blue;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.farebne{
+    background-color: orange;
+}
+
