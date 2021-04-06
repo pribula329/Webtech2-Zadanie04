@@ -49,9 +49,9 @@ function prehladavanieCsv($conn, $vysledky)
         $pole = array();
         foreach ($riadky as $jedno) {
 
-            $udaje = explode("\t", $jedno);
+            $udaje = explode("\t", $jedno);//3 objekty -> 1 pole
 
-            array_push($pole, $udaje);
+            array_push($pole, $udaje);//pole poli(objektov)
 
 
         }
