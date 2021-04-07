@@ -147,43 +147,11 @@ function pocetTabuliek($conn): int
     return count($tables);
 }
 
-function vytvorenieHlavnejTabulky($conn)
-{
-    $pocet =pocetTabuliek($conn);
-    $sql = 'CREATE TABLE IF NOT EXISTS osoby (
-                id INT(6)  AUTO_INCREMENT PRIMARY KEY,
-                meno VARCHAR(60) ,
-                priezvisko VARCHAR(60) ,
-                ucast INT(6) ,
-                minuty INT(6)
-    
-                )';
-    $conn->exec($sql);
-
-
-    for ($i =1; $i<$pocet; $i++){
-        //The name of the column that we want to create.
-        $columnName = 'Prednaska'.$i;
-        try{
-            //Our SQL query that will alter the table and add the new column.
-            $sql = 'ALTER TABLE  osoby ADD  '.$columnName.' varchar(60) ';
-
-            //Execute the query.
-            $conn->query($sql);
-        }
-        catch (PDOException $e){
-
-        }
-
-    }
-
-
-}
 //statistika pre graf
 function statistika($conn){
     $pocet =pocetTabuliek($conn);
     $pole = array();
-    for ($i =0; $i<$pocet-1; $i++){
+    for ($i =0; $i<$pocet; $i++){
 
         $db = "Predanaska".$i;
         $stm = $conn->prepare('select * from '.$db.'  ;');
@@ -218,7 +186,7 @@ function statistika($conn){
 function ludia($conn){
     $pocet =pocetTabuliek($conn);
     $poleLudi = array();
-    for ($i =0; $i<$pocet-1; $i++){
+    for ($i =0; $i<$pocet; $i++){
 
         $db = "Predanaska".$i;
         $stm = $conn->prepare('select * from '.$db.'  ;');
@@ -259,7 +227,7 @@ function ucastNaPrednaskach($conn,$poleLudi){
     foreach ($poleLudi as $clovek){
         $navstevy =0;
 
-        for ($i =0; $i<$pocet-1; $i++){
+        for ($i =0; $i<$pocet; $i++){
 
             $db = "Predanaska".$i;
             $stm = $conn->prepare('select * from '.$db.'  ;');
@@ -301,7 +269,7 @@ function minutyNaPrednske($conn,$poleLudi){
 
     foreach ($poleLudi as $clovek){
         $osobaNaPrednaske=array();
-        for ($i =0; $i<$pocet-1; $i++){
+        for ($i =0; $i<$pocet; $i++){
 
             $db = "Predanaska".$i;
             $meno='"'.$clovek['meno'].'"';

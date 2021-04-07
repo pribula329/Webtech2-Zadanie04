@@ -32,7 +32,7 @@ $casNaPrednaske=minutyNaPrednske($conn,$poleLudi);
     <thead class="thead-dark">
         <tr>
             <th scope="col">Meno</th>
-            <th scope="col">Priezvisko</td>
+            <th scope="col">Priezvisko</th>
             <?php
             $cislo=1;
             foreach ($vysledky[0] as  $pocet){
@@ -47,7 +47,7 @@ $casNaPrednaske=minutyNaPrednske($conn,$poleLudi);
     </thead>
     <tbody>
     <?php
-    vytvorenieHlavnejTabulky($conn);
+
     $index = 0;
     // tabulka
     foreach ($poleLudi as $clovek){
@@ -92,9 +92,10 @@ $casNaPrednaske=minutyNaPrednske($conn,$poleLudi);
     <div id="graf"></div>
 </section>
 
-<script type="text/javascript">
+<script>
         var ludia = <?php echo json_encode($data); ?>;
-graf(ludia);</script>
+graf(ludia);
+</script>
 
 </body>
 </html>
