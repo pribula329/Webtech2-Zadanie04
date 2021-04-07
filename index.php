@@ -36,7 +36,7 @@ $casNaPrednaske=minutyNaPrednske($conn,$poleLudi);
             <?php
             $cislo=1;
             foreach ($vysledky[0] as  $pocet){
-                echo '<th scope="col"> P '.$cislo.'</th>';
+                echo '<th scope="col"> P'.$cislo.' '.datumPrednasky($conn,$cislo).'</th>';
                 $cislo=$cislo+1;
             }
             ?>

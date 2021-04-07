@@ -321,5 +321,20 @@ function casSpolu($pole){
 
     return $dokopy;
 }
+/// datum prednasok
+function datumPrednasky($conn,$cislo){
+    $db = "Predanaska".($cislo-1);
+    $sql = 'select * from '.$db.' where id = 1;';
+    $stm = $conn->prepare($sql);
+    $stm->execute();
+    $udaj = $stm->fetch(PDO::FETCH_ASSOC);
+    $datumAcas = explode(' ', $udaj['datum']);
+    $datum = $datumAcas[0];
+    $datumPodrobne = explode('-', $datum);
+    $vypis = $datumPodrobne[2].'/'.$datumPodrobne[1].'/21';
+    return $vypis;
+}
+
+
 
 ?>
